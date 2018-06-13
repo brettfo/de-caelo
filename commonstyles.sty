@@ -1,0 +1,17 @@
+\ProvidesPackage{commonstyles}
+
+% always indent the first topic (paragraph) after a chapter heading
+\RequirePackage{indentfirst}
+
+% don't display the word 'Chapter'
+\renewcommand{\chaptername}{}
+
+\newenvironment{topic}[1]
+    {%begin
+        \par% always start a new paragraph for each topic
+        \textbf{#1.}
+    }
+    {% end
+    }
+
+\endinput
