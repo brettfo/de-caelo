@@ -3,8 +3,35 @@
 % always indent the first topic (paragraph) after a chapter heading
 \RequirePackage{indentfirst}
 
+% don't insert pagebreaks at new chapters
+\RequirePackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+% format chapter headings to look like:
+%
+%            [I.]
+% QUOD DOMINUS SIT DEUS CAELI.
+%
+\RequirePackage{titlesec}
+\titleformat{\chapter}[block]%
+    {\begin{center}}%
+    {[\thechapter.]\\\MakeUppercase{\chaptername}}%
+    {0pt}%
+    {\MakeUppercase}%
+    [\end{center}]%
+
+% use roman numerals for chapters
+\renewcommand{\thechapter}{\Roman{chapter}}
+
 % don't display the word 'Chapter'
 \renewcommand{\chaptername}{}
+
+\newcommand{\caput}[1]{%
+    \par% all chapters need to start a new paragraph
+    \chapter{#1}%
+}
 
 \newenvironment{topic}[1]
     {%begin
